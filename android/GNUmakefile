@@ -56,7 +56,9 @@ build:
 		rsync -a --delete $(TOPDIR)/ $(call build-dir,$(ABI))/ && \
 		cd $(call build-dir,$(ABI)) && \
 		$(MAKE) -f unix/Makefile -j generic && \
-		cp -f $(call build-dir,$(ABI))/zip $(call out-dir,$(ABI))/ && \
+		mkdir -p $(call install-dir,$(ABI))/bin/ && \
+		cp -f $(call build-dir,$(ABI))/zip $(call install-dir,$(ABI))/bin/ && \
+		cp -f $(call install-dir,$(ABI))/bin/zip $(call out-dir,$(ABI))/ && \
 		$$STRIP --strip-unneeded $(call out-dir,$(ABI))/zip && \
 		true \
 	)
